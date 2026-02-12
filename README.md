@@ -300,24 +300,7 @@ Unauthorized scanning of networks without permission may violate local laws.
 
 ---
 
-# Development Roadmap
 
-```mermaid
-gantt
-    title LANLord Roadmap
-    dateFormat  YYYY-MM-DD
-    section Core
-    Async Engine        :done, 2026-01-01, 10d
-    Discovery           :active, 2026-01-12, 10d
-    Port Scanning       :2026-01-22, 10d
-    section Advanced
-    Fingerprinting      :2026-02-01, 10d
-    Export System       :2026-02-11, 7d
-    section Interface
-    Full TUI Screens    :2026-02-18, 14d
-```
-
----
 
 # License
 
