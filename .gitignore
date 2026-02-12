@@ -1,0 +1,106 @@
+# ==============================
+# Python Bytecode
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==============================
+# Virtual Environments
+# ==============================
+.venv/
+venv/
+env/
+ENV/
+
+# ==============================
+# Build / Distribution
+# ==============================
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ==============================
+# Installer Logs
+# ==============================
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ==============================
+# Testing / Coverage
+# ==============================
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# ==============================
+# IDE / Editor
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# Local Databases
+# ==============================
+*.sqlite3
+*.db
+*.db-journal
+
+# ==============================
+# Environment Variables
+# ==============================
+.env
+.env.*
+
+# ==============================
+# Runtime / Local App Data
+# ==============================
+identity.json
+instance/
+data/
+runtime/
+
+# ==============================
+# Media / Temp Files
+# ==============================
+*.tmp
+*.temp
+*.cache
+
+# ==============================
+# PyInstaller
+# ==============================
+*.spec
+
+# ==============================
+# Node (Future Web Support)
+# ==============================
+node_modules/
+package-lock.json
+
+# ==============================
+# Docker
+# ==============================
+*.tar
+docker-compose.override.yml
+
+# ==============================
+# Certificates / Keys
+# ==============================
+*.pem
+*.key
+*.crt
