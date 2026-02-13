@@ -20,4 +20,9 @@ class Host:
     hostname: Optional[str] = None
     ports: List[Port] = field(default_factory=list)
     os: Optional[str] = None
+    mac: Optional[str] = None
+    vendor: Optional[str] = None
+    http_title: Optional[str] = None
+    ssl_info: Optional[str] = None
+
 

@@ -13,10 +13,15 @@ from lanlord.core.portscan import PortScanner
 from lanlord.core.service import ServiceDetector
 from lanlord.core.fingerprint import Fingerprint
 
-logger = get_logger("lanlord.engine")
+from lanlord.core.arp import ARPScanner
+from lanlord.core.http import HTTPInspector
+from lanlord.core.ssl import SSLInspector
+from lanlord.utils.vendor_lookup import lookup_vendor
+
 
 from lanlord.core.state import ScanState
 
+logger = get_logger("lanlord.engine")
 self.state = ScanState.IDLE
 
 class ScanEngine:
@@ -36,28 +41,70 @@ class ScanEngine:
         self._cancelled = False
 
         self._event_queue = asyncio.Queue()
+        self.arp = ARPScanner()
+        self.http = HTTPInspector()
+        self.ssl = SSLInspector()
 
 
     async def _scan_host(self, ip: str):
+        """
+        Scan a single host with full enrichment pipeline.
+        """
+
         if self._cancelled:
             return None
 
         async with self.host_limiter:
 
-            host = await self.discovery.probe_host(ip)
+            try:
+                # --- Discovery ---
+                host = await self.discovery.probe_host(ip)
 
-            await self.emit("host_discovered", host)
+                await self.emit("host_discovered", host)
 
-            if host.status == HostStatus.ALIVE and not self._cancelled:
+                if host.status != HostStatus.ALIVE:
+                    await self.emit("host_scanned", host)
+                    return host
 
-                if self.profile.detect_os:
+                # --- OS Detection ---
+                if self.profile.detect_os and not self._cancelled:
                     host.os = self.fingerprint.detect_os(ip)
 
-                host.ports = await self._scan_ports_with_limit(ip)
+                # --- Port Scan ---
+                if not self._cancelled:
+                    host.ports = await self._scan_ports_with_limit(ip)
 
-            await self.emit("host_scanned", host)
+                # --- MAC + Vendor ---
+                try:
+                    host.mac = await self.arp.get_mac(ip)
+                    host.vendor = lookup_vendor(host.mac)
+                except Exception:
+                    pass
 
-            return host
+                # --- HTTP Title Extraction ---
+                for port in host.ports:
+                    if port.service == "http" and not self._cancelled:
+                        try:
+                            host.http_title = await self.http.get_title(ip, port.port)
+                        except Exception:
+                            pass
+
+                # --- SSL Certificate Inspection ---
+                for port in host.ports:
+                    if port.service == "https" and not self._cancelled:
+                        try:
+                            host.ssl_info = self.ssl.get_certificate_info(ip, port.port)
+                        except Exception:
+                            pass
+
+                await self.emit("host_scanned", host)
+
+                return host
+
+            except Exception:
+                # Hard isolation: never crash full scan because of one host
+                await self.emit("host_error", ip)
+                return None
 
 
 
