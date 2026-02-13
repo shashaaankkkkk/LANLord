@@ -19,3 +19,5 @@ class Host:
     latency: Optional[float] = None
     hostname: Optional[str] = None
     ports: List[Port] = field(default_factory=list)
+    os: Optional[str] = None
+
