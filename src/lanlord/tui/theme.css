@@ -1,0 +1,49 @@
+/* GitHub Dark Inspired Theme */
+
+Screen {
+    background: #0d1117;
+    color: #c9d1d9;
+}
+
+Header {
+    background: #161b22;
+    color: #58a6ff;
+}
+
+Footer {
+    background: #161b22;
+    color: #8b949e;
+}
+
+#layout {
+    layout: grid;
+    grid-size: 3 1;
+    grid-columns: 25% 50% 25%;
+    height: 100%;
+}
+
+.panel {
+    border: round #30363d;
+    padding: 1;
+    background: #161b22;
+}
+
+#host_table {
+    border: round #30363d;
+}
+
+.alive {
+    color: #3fb950;
+}
+
+.dead {
+    color: #f85149;
+}
+
+.warning {
+    color: #d29922;
+}
+
+.highlight {
+    background: #21262d;
+}

@@ -109,11 +109,22 @@ class ScanEngine:
 
 
     async def scan_stream(self, target: str):
+        from lanlord.utils.network import expand_target
+
+        self.state = ScanState.RUNNING
+
         ips = expand_target(target)
 
         for ip in ips:
+            if self._cancelled:
+                break
+
             host = await self._scan_host(ip)
-            yield host
+            if host:
+                yield host
+
+        self.state = ScanState.COMPLETED
+
 
     async def scan(self, target: str):
         from lanlord.utils.network import expand_target
