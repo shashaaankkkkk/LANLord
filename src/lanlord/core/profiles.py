@@ -17,13 +17,14 @@ class ScanProfile:
 
 QUICK = ScanProfile(
     name="quick",
-    ports=list(range(1, 101)),
-    host_timeout=1.0,
-    port_timeout=1.0,
-    concurrency=100,
+    ports=[22, 80, 443],  
+    host_timeout=0.5,
+    port_timeout=0.5,
+    concurrency=50,
     detect_os=False,
     grab_banner=False
 )
+
 
 
 AGGRESSIVE = ScanProfile(
