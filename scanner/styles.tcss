@@ -1,0 +1,144 @@
+/* ── LANlord Textual CSS ─────────────────────────────────────────── */
+
+Screen {
+    background: $surface;
+}
+
+/* Banner */
+#banner {
+    color: $success;
+    text-align: center;
+    padding: 1 0;
+    text-style: bold;
+}
+
+/* Main container */
+#main-container {
+    width: 100%;
+    height: 1fr;
+    padding: 0 1;
+}
+
+/* Section titles */
+.section-title {
+    color: $accent;
+    text-style: bold;
+    padding: 1 0 0 0;
+}
+
+/* Buttons row */
+.btn-row {
+    height: auto;
+    padding: 1 0;
+    align: left middle;
+}
+
+.btn-row Button {
+    margin: 0 1 0 0;
+}
+
+/* Input rows */
+.input-row {
+    height: auto;
+    padding: 0 0 1 0;
+}
+
+.input-row Input {
+    width: 1fr;
+    margin: 0 1 0 0;
+}
+
+/* Network info display */
+#net-info-display {
+    padding: 1 2;
+    margin: 1 0;
+    background: $panel;
+    border: round $primary;
+    min-height: 3;
+}
+
+#net-hint, #export-hint {
+    color: $text-muted;
+    padding: 0 0 1 0;
+}
+
+/* ── Results panel ─────────────────────────────────────────────────── */
+
+#results-panel {
+    height: 1fr;
+}
+
+#progress-label {
+    color: $warning;
+    padding: 0 0 0 0;
+    text-style: bold;
+}
+
+#scan-progress {
+    margin: 1 0;
+}
+
+#hosts-table {
+    height: auto;
+    max-height: 14;
+    margin: 0 0 1 0;
+    border: round $primary;
+}
+
+#ports-table {
+    height: auto;
+    max-height: 16;
+    margin: 0 0 1 0;
+    border: round $success;
+}
+
+/* ── Log panel ─────────────────────────────────────────────────────── */
+
+#log-panel {
+    height: 1fr;
+}
+
+#activity-log {
+    height: 1fr;
+    border: round $accent;
+    background: $surface;
+    scrollbar-size: 1 1;
+}
+
+/* ── Export panel ──────────────────────────────────────────────────── */
+
+#export-panel {
+    height: auto;
+}
+
+#export-status {
+    padding: 1 2;
+    margin: 1 0;
+}
+
+/* ── Tab customisation ─────────────────────────────────────────────── */
+
+TabbedContent {
+    height: 1fr;
+}
+
+TabPane {
+    padding: 1 1;
+    height: 1fr;
+}
+
+/* DataTable styling */
+DataTable {
+    scrollbar-size: 1 1;
+}
+
+DataTable > .datatable--header {
+    text-style: bold;
+    color: $accent;
+    background: $surface;
+}
+
+/* Footer tweaks */
+Footer {
+    background: $panel;
+}
